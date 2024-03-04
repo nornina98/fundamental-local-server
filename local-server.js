@@ -2,23 +2,25 @@ const http = require("http");
 const PORT = 3000;
 const server = http.createServer();
 
+// Temporary data since there is no database exist ~
 const friends = [
   {
     id: 0,
-    name: "Nikola Tesla",
+    name: "MI Home",
   },
   {
     id: 1,
-    name: "Sir Isaac Newton",
+    name: "Zasma Home",
   },
   {
     id: 2,
-    name: "Albert Einstein",
+    name: "ATH Home",
   },
 ];
 
 server.on("request", (req, res) => {
   const items = req.url.split("/");
+  console.log(items[1]);
   if (req.method === "POST" && items[1] === "friends") {
     req.on("data", (data) => {
       const friend = data.toString();
@@ -54,4 +56,13 @@ server.on("request", (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
-}); //127.0.0.1 => localhost
+});
+
+/*
+fetch("http://localhost:3000/friends", {
+  method: "POST",
+  body: JSON.stringify({ id: 3, name: "JYD Home" }),
+})
+  .then((response) => response.json())
+  .then((friend) => console.log(friend));
+*/
